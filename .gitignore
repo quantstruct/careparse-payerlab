@@ -1,0 +1,3 @@
+# Standards artifacts are reproducible from packages/lock.yaml.
+generated/*
+!generated/.gitkeep

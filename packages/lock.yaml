@@ -1,0 +1,67 @@
+core:
+  fhir:
+    version: "4.0.1"
+    package_name: "hl7.fhir.r4.core"
+    artifact: "package.tgz"
+    url: "https://packages.fhir.org/hl7.fhir.r4.core/4.0.1"
+    output: "generated/fhir"
+
+  uscore:
+    version: "6.1.0"
+    version_family: "6.x"
+    package_name: "hl7.fhir.us.core"
+    artifact: "package.tgz"
+    url: "https://packages.fhir.org/hl7.fhir.us.core/6.1.0"
+    output: "generated/uscore"
+
+  uscdi:
+    version: "current"
+    resolved_version: "USCDI V6"
+    artifact: "uscdi.csv"
+    url: "https://isp.healthit.gov/uscdi-export-public?field_classification_level_target_id%5B%5D=7942&_format=csv"
+    output: "generated/uscdi"
+
+  smart:
+    version: "2.2.0"
+    version_family: "2.x"
+    package_name: "hl7.fhir.uv.smart-app-launch"
+    artifact: "package.tgz"
+    url: "https://hl7.org/fhir/smart-app-launch/STU2.2/package.tgz"
+    output: "generated/smart"
+
+  bulk:
+    version: "1.0.0"
+    version_family: "1.x"
+    package_name: "hl7.fhir.uv.bulkdata"
+    artifact: "package.tgz"
+    url: "https://hl7.org/fhir/uv/bulkdata/STU1/package.tgz"
+    output: "generated/bulk"
+
+  oidc:
+    version: "1.0"
+    artifact: "openid-connect-core-1_0.txt"
+    url: "https://openid.net/specs/openid-connect-core-1_0.txt"
+    discovery_url: "https://openid.net/specs/openid-connect-discovery-1_0.txt"
+    output: "generated/oidc"
+
+future:
+  carin_bb:
+    enabled: false
+
+  pdex:
+    enabled: false
+
+  formulary:
+    enabled: false
+
+  plannet:
+    enabled: false
+
+  crd:
+    enabled: false
+
+  dtr:
+    enabled: false
+
+  pas:
+    enabled: false
