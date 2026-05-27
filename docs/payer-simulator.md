@@ -40,6 +40,22 @@ The payer simulator should include deterministic fixtures for:
 
 Raw FHIR response evidence should remain available so the future product agent can ground answers in source fields instead of free-text inference.
 
+## Local Runtime
+
+Run the simulator with the Maven wrapper:
+
+```bash
+PAYERLAB_PORT=8080 ./mvnw exec:java
+```
+
+Run the tests with:
+
+```bash
+./mvnw test
+```
+
+The implementation exposes only `POST /fhir/Claim/$inquire`. Other FHIR paths return an `OperationOutcome` so the sandbox stays tightly scoped to read-only status inquiry.
+
 ## Later Work
 
 Later phases may add:

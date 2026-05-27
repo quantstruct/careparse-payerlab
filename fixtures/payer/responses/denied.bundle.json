@@ -1,0 +1,66 @@
+{
+  "resourceType": "Bundle",
+  "id": "payerlab-inquiry-denied",
+  "type": "collection",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:claim-response-denied",
+      "resource": {
+        "resourceType": "ClaimResponse",
+        "id": "claim-response-denied",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://careparse.com/fhir/payerlab/status",
+              "code": "denied",
+              "display": "Denied"
+            }
+          ]
+        },
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "use": "preauthorization",
+        "patient": {
+          "reference": "Patient/payerlab-patient-denied"
+        },
+        "created": "2026-01-01",
+        "insurer": {
+          "reference": "Organization/careparse-payerlab-payer"
+        },
+        "requestor": {
+          "reference": "Practitioner/payerlab-provider"
+        },
+        "request": {
+          "identifier": {
+            "system": "https://careparse.com/fhir/payerlab/authorization",
+            "value": "AUTH-DENIED-001"
+          }
+        },
+        "outcome": "complete",
+        "disposition": "Authorization denied: requested service is not medically necessary under the payer policy.",
+        "error": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://careparse.com/fhir/payerlab/denial-reason",
+                  "code": "not-medically-necessary",
+                  "display": "Not medically necessary"
+                }
+              ],
+              "text": "The submitted clinical evidence does not satisfy medical necessity criteria."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

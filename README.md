@@ -32,6 +32,25 @@ Verify the local standards cache:
 
 The generated artifacts are local build outputs. The committed source of truth is the manifest, fetch script, verification script, and documentation.
 
+Run the payer simulator:
+
+```bash
+PAYERLAB_PORT=8080 ./mvnw exec:java
+```
+
+The first simulated payer endpoint is:
+
+```text
+POST http://localhost:8080/fhir/Claim/$inquire
+Content-Type: application/fhir+json
+```
+
+Run the Java test suite:
+
+```bash
+./mvnw test
+```
+
 ## Docs
 
 - `docs/standards.md`

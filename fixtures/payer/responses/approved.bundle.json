@@ -1,0 +1,53 @@
+{
+  "resourceType": "Bundle",
+  "id": "payerlab-inquiry-approved",
+  "type": "collection",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:claim-response-approved",
+      "resource": {
+        "resourceType": "ClaimResponse",
+        "id": "claim-response-approved",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://careparse.com/fhir/payerlab/status",
+              "code": "approved",
+              "display": "Approved"
+            }
+          ]
+        },
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "use": "preauthorization",
+        "patient": {
+          "reference": "Patient/payerlab-patient-approved"
+        },
+        "created": "2026-01-01",
+        "insurer": {
+          "reference": "Organization/careparse-payerlab-payer"
+        },
+        "requestor": {
+          "reference": "Practitioner/payerlab-provider"
+        },
+        "request": {
+          "identifier": {
+            "system": "https://careparse.com/fhir/payerlab/authorization",
+            "value": "AUTH-APPROVED-001"
+          }
+        },
+        "outcome": "complete",
+        "disposition": "Authorization approved for the requested service.",
+        "preAuthRef": "PA-APPROVED-2026-0001"
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "resourceType": "Bundle",
+  "id": "payerlab-inquiry-pended",
+  "type": "collection",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:claim-response-pended",
+      "resource": {
+        "resourceType": "ClaimResponse",
+        "id": "claim-response-pended",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://careparse.com/fhir/payerlab/status",
+              "code": "pended",
+              "display": "Pended"
+            }
+          ]
+        },
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "use": "preauthorization",
+        "patient": {
+          "reference": "Patient/payerlab-patient-pended"
+        },
+        "created": "2026-01-01",
+        "insurer": {
+          "reference": "Organization/careparse-payerlab-payer"
+        },
+        "requestor": {
+          "reference": "Practitioner/payerlab-provider"
+        },
+        "request": {
+          "identifier": {
+            "system": "https://careparse.com/fhir/payerlab/authorization",
+            "value": "AUTH-PENDED-001"
+          }
+        },
+        "outcome": "queued",
+        "disposition": "Authorization inquiry is pended for clinical review.",
+        "processNote": [
+          {
+            "number": 1,
+            "type": "display",
+            "text": "Clinical review is in progress. No additional documentation is requested at this time."
+          }
+        ]
+      }
+    }
+  ]
+}

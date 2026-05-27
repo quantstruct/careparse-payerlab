@@ -1,0 +1,47 @@
+[
+  {
+    "state": "approved",
+    "patientMemberIdentifier": "CP-MEMBER-APPROVED",
+    "payerIdentifier": "CP-PAYER-001",
+    "requestingProviderNpi": "1234567893",
+    "authorizationIdentifier": "AUTH-APPROVED-001",
+    "httpStatus": 200,
+    "response": "responses/approved.bundle.json"
+  },
+  {
+    "state": "denied",
+    "patientMemberIdentifier": "CP-MEMBER-DENIED",
+    "payerIdentifier": "CP-PAYER-001",
+    "requestingProviderNpi": "1234567893",
+    "authorizationIdentifier": "AUTH-DENIED-001",
+    "httpStatus": 200,
+    "response": "responses/denied.bundle.json"
+  },
+  {
+    "state": "pended",
+    "patientMemberIdentifier": "CP-MEMBER-PENDED",
+    "payerIdentifier": "CP-PAYER-001",
+    "requestingProviderNpi": "1234567893",
+    "authorizationIdentifier": "AUTH-PENDED-001",
+    "httpStatus": 200,
+    "response": "responses/pended.bundle.json"
+  },
+  {
+    "state": "additional-info-needed",
+    "patientMemberIdentifier": "CP-MEMBER-INFO",
+    "payerIdentifier": "CP-PAYER-001",
+    "requestingProviderNpi": "1234567893",
+    "authorizationIdentifier": "AUTH-INFO-001",
+    "httpStatus": 200,
+    "response": "responses/additional-info-needed.bundle.json"
+  },
+  {
+    "state": "technical-error",
+    "patientMemberIdentifier": "CP-MEMBER-TECHNICAL",
+    "payerIdentifier": "CP-PAYER-001",
+    "requestingProviderNpi": "1234567893",
+    "authorizationIdentifier": "AUTH-TECHNICAL-001",
+    "httpStatus": 500,
+    "response": "operation-outcomes/technical-error.json"
+  }
+]

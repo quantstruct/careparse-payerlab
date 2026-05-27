@@ -1,0 +1,11 @@
+{
+  "resourceType": "OperationOutcome",
+  "id": "payerlab-technical-error",
+  "issue": [
+    {
+      "severity": "error",
+      "code": "exception",
+      "diagnostics": "Deterministic fixture simulating a payer-side technical processing error."
+    }
+  ]
+}

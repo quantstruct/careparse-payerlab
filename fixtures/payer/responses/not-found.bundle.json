@@ -1,0 +1,54 @@
+{
+  "resourceType": "Bundle",
+  "id": "payerlab-inquiry-not-found",
+  "type": "collection",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:claim-response-not-found",
+      "resource": {
+        "resourceType": "ClaimResponse",
+        "id": "claim-response-not-found",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://careparse.com/fhir/payerlab/status",
+              "code": "not-found",
+              "display": "Not found"
+            }
+          ]
+        },
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "use": "preauthorization",
+        "created": "2026-01-01",
+        "insurer": {
+          "reference": "Organization/careparse-payerlab-payer"
+        },
+        "outcome": "error",
+        "disposition": "No matching prior authorization inquiry fixture was found."
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:operation-outcome-not-found",
+      "resource": {
+        "resourceType": "OperationOutcome",
+        "id": "operation-outcome-not-found",
+        "issue": [
+          {
+            "severity": "information",
+            "code": "not-found",
+            "diagnostics": "The simulator did not find a fixture matching member identifier, payer identifier, provider NPI, and authorization identifier."
+          }
+        ]
+      }
+    }
+  ]
+}

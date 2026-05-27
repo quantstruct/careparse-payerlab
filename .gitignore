@@ -1,3 +1,6 @@
 # Standards artifacts are reproducible from packages/lock.yaml.
 generated/*
 !generated/.gitkeep
+
+# Java build output.
+target/
