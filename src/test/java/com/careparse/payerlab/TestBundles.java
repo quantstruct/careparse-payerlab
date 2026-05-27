@@ -17,6 +17,36 @@ final class TestBundles {
     }
 
     static Bundle inquiryBundle(String memberIdentifier, String payerIdentifier, String providerNpi, String authorizationIdentifier) {
+        return inquiryBundle(
+                memberIdentifier,
+                payerIdentifier,
+                providerNpi,
+                authorizationIdentifier,
+                "professional",
+                "Professional");
+    }
+
+    static Bundle dentalInquiryBundle(
+            String memberIdentifier,
+            String payerIdentifier,
+            String providerNpi,
+            String authorizationIdentifier) {
+        return inquiryBundle(
+                memberIdentifier,
+                payerIdentifier,
+                providerNpi,
+                authorizationIdentifier,
+                "oral",
+                "Oral");
+    }
+
+    private static Bundle inquiryBundle(
+            String memberIdentifier,
+            String payerIdentifier,
+            String providerNpi,
+            String authorizationIdentifier,
+            String claimTypeCode,
+            String claimTypeDisplay) {
         Patient patient = new Patient();
         patient.setId("Patient/inquiry-patient");
         patient.addIdentifier()
@@ -49,8 +79,8 @@ final class TestBundles {
         claim.setStatus(Claim.ClaimStatus.ACTIVE);
         claim.setType(new CodeableConcept(new Coding(
                 "http://terminology.hl7.org/CodeSystem/claim-type",
-                "professional",
-                "Professional")));
+                claimTypeCode,
+                claimTypeDisplay)));
         claim.setUse(Claim.Use.PREAUTHORIZATION);
         claim.setPatient(new Reference("urn:uuid:patient"));
         claim.setCreated(new Date(1767225600000L));

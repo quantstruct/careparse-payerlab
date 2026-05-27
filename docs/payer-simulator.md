@@ -63,6 +63,17 @@ curl -sS \
   http://localhost:8080/fhir/Claim/\$inquire
 ```
 
+Run the dental prior authorization status demo:
+
+```bash
+curl -sS \
+  -H 'Content-Type: application/fhir+json' \
+  --data @fixtures/payer/requests/dental-approved-inquiry.bundle.json \
+  http://localhost:8080/fhir/Claim/\$inquire
+```
+
+Dental demo fixtures are API-only and return raw FHIR `Bundle` responses. They use FHIR `Claim.type` code `oral` plus local demo dental service codes to avoid depending on licensed dental procedure code content.
+
 Run the tests with:
 
 ```bash

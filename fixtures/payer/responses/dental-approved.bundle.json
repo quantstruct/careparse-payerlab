@@ -1,0 +1,59 @@
+{
+  "resourceType": "Bundle",
+  "id": "payerlab-dental-inquiry-approved",
+  "type": "collection",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:claim-response-dental-approved",
+      "resource": {
+        "resourceType": "ClaimResponse",
+        "id": "claim-response-dental-approved",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://careparse.com/fhir/payerlab/status",
+              "code": "approved",
+              "display": "Approved"
+            },
+            {
+              "system": "https://careparse.com/fhir/payerlab/demo",
+              "code": "dental",
+              "display": "Dental prior authorization demo"
+            }
+          ]
+        },
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "oral",
+              "display": "Oral"
+            }
+          ]
+        },
+        "use": "preauthorization",
+        "patient": {
+          "reference": "Patient/dental-patient-approved"
+        },
+        "created": "2026-01-01",
+        "insurer": {
+          "reference": "Organization/careparse-dental-payerlab-payer"
+        },
+        "requestor": {
+          "reference": "Practitioner/dental-provider"
+        },
+        "request": {
+          "identifier": {
+            "system": "https://careparse.com/fhir/payerlab/authorization",
+            "value": "DENTAL-AUTH-APPROVED-001"
+          }
+        },
+        "outcome": "complete",
+        "disposition": "Dental prior authorization approved for the requested service.",
+        "preAuthRef": "DENTAL-PA-APPROVED-2026-0001"
+      }
+    }
+  ]
+}

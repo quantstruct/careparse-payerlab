@@ -36,6 +36,42 @@
     "response": "responses/additional-info-needed.bundle.json"
   },
   {
+    "state": "dental-approved",
+    "patientMemberIdentifier": "CP-DENTAL-MEMBER-APPROVED",
+    "payerIdentifier": "CP-DENTAL-PAYER-001",
+    "requestingProviderNpi": "1888888888",
+    "authorizationIdentifier": "DENTAL-AUTH-APPROVED-001",
+    "httpStatus": 200,
+    "response": "responses/dental-approved.bundle.json"
+  },
+  {
+    "state": "dental-denied",
+    "patientMemberIdentifier": "CP-DENTAL-MEMBER-DENIED",
+    "payerIdentifier": "CP-DENTAL-PAYER-001",
+    "requestingProviderNpi": "1888888888",
+    "authorizationIdentifier": "DENTAL-AUTH-DENIED-001",
+    "httpStatus": 200,
+    "response": "responses/dental-denied.bundle.json"
+  },
+  {
+    "state": "dental-pended",
+    "patientMemberIdentifier": "CP-DENTAL-MEMBER-PENDED",
+    "payerIdentifier": "CP-DENTAL-PAYER-001",
+    "requestingProviderNpi": "1888888888",
+    "authorizationIdentifier": "DENTAL-AUTH-PENDED-001",
+    "httpStatus": 200,
+    "response": "responses/dental-pended.bundle.json"
+  },
+  {
+    "state": "dental-additional-info-needed",
+    "patientMemberIdentifier": "CP-DENTAL-MEMBER-INFO",
+    "payerIdentifier": "CP-DENTAL-PAYER-001",
+    "requestingProviderNpi": "1888888888",
+    "authorizationIdentifier": "DENTAL-AUTH-INFO-001",
+    "httpStatus": 200,
+    "response": "responses/dental-additional-info-needed.bundle.json"
+  },
+  {
     "state": "technical-error",
     "patientMemberIdentifier": "CP-MEMBER-TECHNICAL",
     "payerIdentifier": "CP-PAYER-001",

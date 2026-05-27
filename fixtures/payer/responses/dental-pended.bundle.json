@@ -1,0 +1,65 @@
+{
+  "resourceType": "Bundle",
+  "id": "payerlab-dental-inquiry-pended",
+  "type": "collection",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:claim-response-dental-pended",
+      "resource": {
+        "resourceType": "ClaimResponse",
+        "id": "claim-response-dental-pended",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://careparse.com/fhir/payerlab/status",
+              "code": "pended",
+              "display": "Pended"
+            },
+            {
+              "system": "https://careparse.com/fhir/payerlab/demo",
+              "code": "dental",
+              "display": "Dental prior authorization demo"
+            }
+          ]
+        },
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "oral",
+              "display": "Oral"
+            }
+          ]
+        },
+        "use": "preauthorization",
+        "patient": {
+          "reference": "Patient/dental-patient-pended"
+        },
+        "created": "2026-01-01",
+        "insurer": {
+          "reference": "Organization/careparse-dental-payerlab-payer"
+        },
+        "requestor": {
+          "reference": "Practitioner/dental-provider"
+        },
+        "request": {
+          "identifier": {
+            "system": "https://careparse.com/fhir/payerlab/authorization",
+            "value": "DENTAL-AUTH-PENDED-001"
+          }
+        },
+        "outcome": "queued",
+        "disposition": "Dental prior authorization inquiry is pended for review.",
+        "processNote": [
+          {
+            "number": 1,
+            "type": "display",
+            "text": "Dental review is in progress. No additional documentation is requested at this time."
+          }
+        ]
+      }
+    }
+  ]
+}

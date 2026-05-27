@@ -1,0 +1,72 @@
+{
+  "resourceType": "Bundle",
+  "id": "payerlab-dental-inquiry-denied",
+  "type": "collection",
+  "timestamp": "2026-01-01T00:00:00Z",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:claim-response-dental-denied",
+      "resource": {
+        "resourceType": "ClaimResponse",
+        "id": "claim-response-dental-denied",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://careparse.com/fhir/payerlab/status",
+              "code": "denied",
+              "display": "Denied"
+            },
+            {
+              "system": "https://careparse.com/fhir/payerlab/demo",
+              "code": "dental",
+              "display": "Dental prior authorization demo"
+            }
+          ]
+        },
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "oral",
+              "display": "Oral"
+            }
+          ]
+        },
+        "use": "preauthorization",
+        "patient": {
+          "reference": "Patient/dental-patient-denied"
+        },
+        "created": "2026-01-01",
+        "insurer": {
+          "reference": "Organization/careparse-dental-payerlab-payer"
+        },
+        "requestor": {
+          "reference": "Practitioner/dental-provider"
+        },
+        "request": {
+          "identifier": {
+            "system": "https://careparse.com/fhir/payerlab/authorization",
+            "value": "DENTAL-AUTH-DENIED-001"
+          }
+        },
+        "outcome": "complete",
+        "disposition": "Dental prior authorization denied for the requested service.",
+        "error": [
+          {
+            "code": {
+              "coding": [
+                {
+                  "system": "https://careparse.com/fhir/payerlab/denial-reason",
+                  "code": "dental-benefit-not-covered",
+                  "display": "Dental benefit not covered"
+                }
+              ],
+              "text": "The requested dental service is not covered by this demo plan."
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

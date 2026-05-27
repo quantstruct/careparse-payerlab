@@ -4,3 +4,7 @@ generated/*
 
 # Java build output.
 target/
+
+# macOS metadata.
+.DS_Store
+**/.DS_Store

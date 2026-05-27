@@ -1,0 +1,146 @@
+{
+  "resourceType": "Bundle",
+  "id": "payerlab-dental-denied-inquiry-request",
+  "meta": {
+    "profile": [
+      "http://hl7.org/fhir/us/davinci-pas/StructureDefinition/profile-pas-inquiry-request-bundle"
+    ]
+  },
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:patient",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "dental-patient-denied",
+        "identifier": [
+          {
+            "system": "https://careparse.com/fhir/payerlab/member",
+            "value": "CP-DENTAL-MEMBER-DENIED"
+          }
+        ],
+        "name": [
+          {
+            "family": "Patel",
+            "given": [
+              "Rina"
+            ]
+          }
+        ],
+        "birthDate": "1969-09-03"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:payer",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "dental-payer",
+        "identifier": [
+          {
+            "system": "https://careparse.com/fhir/payerlab/payer",
+            "value": "CP-DENTAL-PAYER-001"
+          }
+        ],
+        "name": "CareParse Dental PayerLab"
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:provider",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "dental-provider",
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "1888888888"
+          }
+        ],
+        "name": [
+          {
+            "family": "Nguyen",
+            "given": [
+              "Avery"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:coverage",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "dental-coverage-denied",
+        "status": "active",
+        "subscriberId": "CP-DENTAL-MEMBER-DENIED",
+        "beneficiary": {
+          "reference": "urn:uuid:patient"
+        },
+        "payor": [
+          {
+            "reference": "urn:uuid:payer"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:claim",
+      "resource": {
+        "resourceType": "Claim",
+        "id": "dental-inquiry-denied",
+        "identifier": [
+          {
+            "system": "https://careparse.com/fhir/payerlab/authorization",
+            "value": "DENTAL-AUTH-DENIED-001"
+          }
+        ],
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "oral",
+              "display": "Oral"
+            }
+          ]
+        },
+        "use": "preauthorization",
+        "patient": {
+          "reference": "urn:uuid:patient"
+        },
+        "created": "2026-01-01",
+        "insurer": {
+          "reference": "urn:uuid:payer"
+        },
+        "provider": {
+          "reference": "urn:uuid:provider"
+        },
+        "insurance": [
+          {
+            "sequence": 1,
+            "focal": true,
+            "coverage": {
+              "reference": "urn:uuid:coverage"
+            },
+            "preAuthRef": [
+              "DENTAL-AUTH-DENIED-001"
+            ]
+          }
+        ],
+        "item": [
+          {
+            "sequence": 1,
+            "productOrService": {
+              "coding": [
+                {
+                  "system": "https://careparse.com/fhir/payerlab/dental-service",
+                  "code": "DEMO-DENTAL-IMPLANT",
+                  "display": "Dental implant prior authorization demo"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
