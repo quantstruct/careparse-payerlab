@@ -1,0 +1,108 @@
+{
+  "resourceType": "Bundle",
+  "id": "payerlab-approved-inquiry-request",
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:patient",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "inquiry-patient",
+        "identifier": [
+          {
+            "system": "https://careparse.com/fhir/payerlab/member",
+            "value": "CP-MEMBER-APPROVED"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:payer",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "inquiry-payer",
+        "identifier": [
+          {
+            "system": "https://careparse.com/fhir/payerlab/payer",
+            "value": "CP-PAYER-001"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:provider",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "inquiry-provider",
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "1234567893"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:coverage",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "inquiry-coverage",
+        "subscriberId": "CP-MEMBER-APPROVED",
+        "beneficiary": {
+          "reference": "urn:uuid:patient"
+        },
+        "payor": [
+          {
+            "reference": "urn:uuid:payer"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:claim",
+      "resource": {
+        "resourceType": "Claim",
+        "id": "inquiry-claim",
+        "identifier": [
+          {
+            "system": "https://careparse.com/fhir/payerlab/authorization",
+            "value": "AUTH-APPROVED-001"
+          }
+        ],
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional",
+              "display": "Professional"
+            }
+          ]
+        },
+        "use": "preauthorization",
+        "patient": {
+          "reference": "urn:uuid:patient"
+        },
+        "created": "2026-01-01",
+        "insurer": {
+          "reference": "urn:uuid:payer"
+        },
+        "provider": {
+          "reference": "urn:uuid:provider"
+        },
+        "insurance": [
+          {
+            "sequence": 1,
+            "focal": true,
+            "coverage": {
+              "reference": "urn:uuid:coverage"
+            },
+            "preAuthRef": [
+              "AUTH-APPROVED-001"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

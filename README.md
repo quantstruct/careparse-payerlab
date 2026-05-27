@@ -38,11 +38,26 @@ Run the payer simulator:
 PAYERLAB_PORT=8080 ./mvnw exec:java
 ```
 
+Run the portable Docker stack:
+
+```bash
+docker compose up --build
+```
+
 The first simulated payer endpoint is:
 
 ```text
 POST http://localhost:8080/fhir/Claim/$inquire
 Content-Type: application/fhir+json
+```
+
+Smoke test the running stack:
+
+```bash
+curl -sS \
+  -H 'Content-Type: application/fhir+json' \
+  --data @fixtures/payer/requests/approved-inquiry.bundle.json \
+  http://localhost:8080/fhir/Claim/\$inquire
 ```
 
 Run the Java test suite:

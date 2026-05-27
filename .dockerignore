@@ -1,0 +1,8 @@
+.git
+.gitignore
+.DS_Store
+
+generated/
+target/
+
+*.log
