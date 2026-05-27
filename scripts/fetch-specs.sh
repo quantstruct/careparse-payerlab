@@ -76,14 +76,15 @@ write_metadata() {
   } > "$out_dir/source-metadata.txt"
 }
 
-fetch_fhir_package() {
-  local spec="$1"
-  local label="$2"
+fetch_package() {
+  local section="$1"
+  local spec="$2"
+  local label="$3"
   local version package_name url out_dir artifact
 
-  version="$(yaml_value core "$spec" version)"
-  package_name="$(yaml_value core "$spec" package_name)"
-  url="$(yaml_value core "$spec" url)"
+  version="$(yaml_value "$section" "$spec" version)"
+  package_name="$(yaml_value "$section" "$spec" package_name)"
+  url="$(yaml_value "$section" "$spec" url)"
   out_dir="$(prepare_dir "$spec")"
   artifact="package.tgz"
 
@@ -93,6 +94,13 @@ fetch_fhir_package() {
   tar -xzf "$out_dir/$artifact" -C "$out_dir/extracted"
   write_metadata "$out_dir" "$package_name" "$version" "$url"
   write_checksums "$out_dir" "$artifact"
+}
+
+fetch_fhir_package() {
+  local spec="$1"
+  local label="$2"
+
+  fetch_package "core" "$spec" "$label"
 }
 
 fetch_uscdi() {
@@ -137,5 +145,9 @@ fetch_uscdi
 fetch_fhir_package "smart" "SMART App Launch"
 fetch_fhir_package "bulk" "Bulk FHIR"
 fetch_oidc
+fetch_package "payer" "pas" "Da Vinci PAS"
+fetch_package "payer" "crd" "Da Vinci CRD"
+fetch_package "payer" "dtr" "Da Vinci DTR"
+fetch_package "payer" "hrex" "Da Vinci HRex"
 
 printf 'Standards artifacts written to %s\n' "$GENERATED_DIR"

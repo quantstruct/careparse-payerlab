@@ -1,6 +1,6 @@
 # Standards Layer
 
-This repository starts with the standards layer only. It prepares the artifacts needed for ingestion, identity, and interoperability without implementing prior authorization workflows or payer APIs.
+This repository starts with a standards and payer-simulation foundation. It prepares the artifacts needed for ingestion, identity, interoperability, and a local payer-side PAS simulator without implementing the product agent yet.
 
 ## Required Layer
 
@@ -13,7 +13,7 @@ This repository starts with the standards layer only. It prepares the artifacts 
 
 The required layer is the ingestion, identity, and interoperability foundation for the CareParse graph. FHIR R4 provides the resource model, US Core constrains US clinical exchange, USCDI defines the expected data classes and elements, SMART and OIDC cover application launch and identity primitives, and Bulk FHIR supports population-scale data access patterns.
 
-## Future Payer Layer
+## Payer Simulation Layer
 
 - CARIN BB
 - PDex
@@ -23,7 +23,7 @@ The required layer is the ingestion, identity, and interoperability foundation f
 - DTR
 - PAS
 
-The future payer layer is reserved for prior authorization and payer workflow support. These implementation guides are present only as disabled placeholders in `packages/lock.yaml`; this phase does not implement them.
+The payer simulation layer starts with Da Vinci PAS for prior authorization status inquiry. CRD and DTR are pulled as workflow context, but the first simulator only exposes payer-side PAS status behavior. CARIN BB, PDex, Formulary, and Plan-Net remain future context.
 
 ## Artifact Policy
 

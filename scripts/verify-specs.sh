@@ -78,12 +78,13 @@ json_version() {
 }
 
 verify_package() {
-  local spec="$1"
-  local label="$2"
-  shift 2
+  local section="$1"
+  local spec="$2"
+  local label="$3"
+  shift 3
 
   local version out_dir package_json actual_version resource
-  version="$(yaml_value core "$spec" version)"
+  version="$(yaml_value "$section" "$spec" version)"
   out_dir="$GENERATED_DIR/$spec"
   package_json="$out_dir/extracted/package/package.json"
 
@@ -101,6 +102,22 @@ verify_package() {
   done
 
   print_ok "$label"
+}
+
+verify_core_package() {
+  local spec="$1"
+  local label="$2"
+  shift 2
+
+  verify_package "core" "$spec" "$label" "$@"
+}
+
+verify_payer_package() {
+  local spec="$1"
+  local label="$2"
+  shift 2
+
+  verify_package "payer" "$spec" "$label" "$@"
 }
 
 verify_uscdi() {
@@ -150,14 +167,14 @@ verify_oidc() {
   print_ok "$label"
 }
 
-verify_package "fhir" "FHIR R4" \
+verify_core_package "fhir" "FHIR R4" \
   "package/StructureDefinition-Patient.json" \
   "package/ValueSet-administrative-gender.json" \
   "package/CodeSystem-observation-category.json" \
   "package/OperationDefinition-Resource-validate.json" \
   "package/CapabilityStatement-base.json"
 
-verify_package "uscore" "US Core" \
+verify_core_package "uscore" "US Core" \
   "package/StructureDefinition-us-core-patient.json" \
   "package/ValueSet-us-core-clinical-note-type.json" \
   "package/CodeSystem-us-core-category.json" \
@@ -166,14 +183,14 @@ verify_package "uscore" "US Core" \
 
 verify_uscdi
 
-verify_package "smart" "SMART" \
+verify_core_package "smart" "SMART" \
   "package/ImplementationGuide-hl7.fhir.uv.smart-app-launch.json" \
   "package/CapabilityStatement-smart-app-state-server.json" \
   "package/CodeSystem-smart-codes.json" \
   "package/StructureDefinition-smart-app-state-basic.json" \
   "package/ValueSet-smart-launch-types.json"
 
-verify_package "bulk" "Bulk FHIR" \
+verify_core_package "bulk" "Bulk FHIR" \
   "package/ImplementationGuide-hl7.fhir.uv.bulkdata.json" \
   "package/CapabilityStatement-bulk-data.json" \
   "package/OperationDefinition-patient-export.json" \
@@ -181,3 +198,36 @@ verify_package "bulk" "Bulk FHIR" \
   "package/OperationDefinition-export.json"
 
 verify_oidc
+
+verify_payer_package "pas" "PAS" \
+  "package/OperationDefinition-Claim-inquiry.json" \
+  "package/OperationDefinition-Claim-submit.json" \
+  "package/StructureDefinition-profile-pas-inquiry-request-bundle.json" \
+  "package/StructureDefinition-profile-pas-inquiry-response-bundle.json" \
+  "package/StructureDefinition-profile-claim-inquiry.json" \
+  "package/StructureDefinition-profile-claiminquiryresponse.json" \
+  "package/StructureDefinition-profile-task.json" \
+  "package/CapabilityStatement-EHRCapabilities.json" \
+  "package/CapabilityStatement-IntermediaryCapabilities.json" \
+  "package/example/Bundle-PASClaimInquiryBundleExample.json" \
+  "package/example/Bundle-PASClaimInquiryResponseBundleExample.json"
+
+verify_payer_package "crd" "CRD" \
+  "package/ImplementationGuide-hl7.fhir.us.davinci-crd.json" \
+  "package/CapabilityStatement-crd-server.json" \
+  "package/CapabilityStatement-crd-client6.1.json" \
+  "package/Binary-CRDServiceRequest.json" \
+  "package/StructureDefinition-ext-coverage-information.json"
+
+verify_payer_package "dtr" "DTR" \
+  "package/ImplementationGuide-hl7.fhir.us.davinci-dtr.json" \
+  "package/OperationDefinition-questionnaire-package.json" \
+  "package/StructureDefinition-dtr-questionnaireresponse.json" \
+  "package/CapabilityStatement-dtr-payer-service.json"
+
+verify_payer_package "hrex" "HRex" \
+  "package/ImplementationGuide-hl7.fhir.us.davinci-hrex.json" \
+  "package/StructureDefinition-hrex-coverage.json" \
+  "package/StructureDefinition-hrex-organization.json" \
+  "package/StructureDefinition-hrex-provenance.json" \
+  "package/StructureDefinition-hrex-task-data-request.json"

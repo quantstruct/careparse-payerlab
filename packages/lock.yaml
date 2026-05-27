@@ -44,6 +44,35 @@ core:
     discovery_url: "https://openid.net/specs/openid-connect-discovery-1_0.txt"
     output: "generated/oidc"
 
+payer:
+  pas:
+    version: "2.1.0"
+    package_name: "hl7.fhir.us.davinci-pas"
+    artifact: "package.tgz"
+    url: "https://packages.fhir.org/hl7.fhir.us.davinci-pas/2.1.0"
+    output: "generated/pas"
+
+  crd:
+    version: "2.1.0"
+    package_name: "hl7.fhir.us.davinci-crd"
+    artifact: "package.tgz"
+    url: "https://packages.fhir.org/hl7.fhir.us.davinci-crd/2.1.0"
+    output: "generated/crd"
+
+  dtr:
+    version: "2.1.0"
+    package_name: "hl7.fhir.us.davinci-dtr"
+    artifact: "package.tgz"
+    url: "https://packages.fhir.org/hl7.fhir.us.davinci-dtr/2.1.0"
+    output: "generated/dtr"
+
+  hrex:
+    version: "1.1.0"
+    package_name: "hl7.fhir.us.davinci-hrex"
+    artifact: "package.tgz"
+    url: "https://packages.fhir.org/hl7.fhir.us.davinci-hrex/1.1.0"
+    output: "generated/hrex"
+
 future:
   carin_bb:
     enabled: false
@@ -55,13 +84,4 @@ future:
     enabled: false
 
   plannet:
-    enabled: false
-
-  crd:
-    enabled: false
-
-  dtr:
-    enabled: false
-
-  pas:
     enabled: false
