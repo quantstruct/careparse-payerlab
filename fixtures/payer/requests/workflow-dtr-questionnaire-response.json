@@ -1,0 +1,38 @@
+{
+  "resourceType": "QuestionnaireResponse",
+  "id": "workflow-dtr-response",
+  "questionnaire": "https://careparse.com/fhir/payerlab/Questionnaire/payerlab-dental-orthodontics",
+  "status": "completed",
+  "subject": {
+    "reference": "Patient/workflow-patient"
+  },
+  "item": [
+    {
+      "linkId": "radiograph-date",
+      "text": "Most recent radiograph date",
+      "answer": [
+        {
+          "valueDate": "2026-01-02"
+        }
+      ]
+    },
+    {
+      "linkId": "periodontal-charting",
+      "text": "Periodontal charting summary",
+      "answer": [
+        {
+          "valueString": "Generalized mild periodontal findings with no active infection."
+        }
+      ]
+    },
+    {
+      "linkId": "medical-necessity",
+      "text": "Clinical rationale for orthodontic evaluation",
+      "answer": [
+        {
+          "valueString": "Functional malocclusion evaluation requested after dental examination."
+        }
+      ]
+    }
+  ]
+}

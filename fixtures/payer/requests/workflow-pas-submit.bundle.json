@@ -1,0 +1,115 @@
+{
+  "resourceType": "Bundle",
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:patient",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "workflow-patient",
+        "identifier": [
+          {
+            "system": "https://careparse.com/fhir/payerlab/member",
+            "value": "CP-DENTAL-MEMBER-WORKFLOW"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:payer",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "workflow-payer",
+        "identifier": [
+          {
+            "system": "https://careparse.com/fhir/payerlab/payer",
+            "value": "CP-DENTAL-PAYER-001"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:provider",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "workflow-provider",
+        "identifier": [
+          {
+            "system": "http://hl7.org/fhir/sid/us-npi",
+            "value": "1888888888"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:coverage",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "workflow-coverage",
+        "subscriberId": "CP-DENTAL-MEMBER-WORKFLOW",
+        "beneficiary": {
+          "reference": "urn:uuid:patient"
+        },
+        "payor": [
+          {
+            "reference": "urn:uuid:payer"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "urn:uuid:claim",
+      "resource": {
+        "resourceType": "Claim",
+        "id": "workflow-pas-submit",
+        "identifier": [
+          {
+            "system": "https://careparse.com/fhir/payerlab/order",
+            "value": "ORDER-DENTAL-ORTHO-001"
+          }
+        ],
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "oral",
+              "display": "Oral"
+            }
+          ]
+        },
+        "use": "preauthorization",
+        "patient": {
+          "reference": "urn:uuid:patient"
+        },
+        "created": "2026-01-01",
+        "insurer": {
+          "reference": "urn:uuid:payer"
+        },
+        "provider": {
+          "reference": "urn:uuid:provider"
+        },
+        "insurance": [
+          {
+            "sequence": 1,
+            "focal": true,
+            "coverage": {
+              "reference": "urn:uuid:coverage"
+            }
+          }
+        ],
+        "supportingInfo": [
+          {
+            "sequence": 1,
+            "category": {
+              "text": "DTR QuestionnaireResponse"
+            },
+            "valueReference": {
+              "reference": "QuestionnaireResponse/workflow-dtr-response"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

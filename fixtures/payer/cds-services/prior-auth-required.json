@@ -1,0 +1,47 @@
+{
+  "cards": [
+    {
+      "summary": "Prior authorization required for orthodontic evaluation",
+      "detail": "CareParse Dental Advantage requires documentation before PAS submission. Complete the payer questionnaire and include radiograph and periodontal charting details with the prior authorization request.",
+      "indicator": "warning",
+      "source": {
+        "label": "CareParse PayerLab"
+      },
+      "links": [
+        {
+          "label": "Launch DTR questionnaire",
+          "url": "http://localhost:8080/dtr/payerlab-dental-orthodontics",
+          "type": "smart",
+          "appContext": "questionnaire=http://localhost:8080/fhir/Questionnaire/payerlab-dental-orthodontics"
+        }
+      ],
+      "suggestions": [
+        {
+          "label": "Attach payer documentation requirements",
+          "uuid": "payerlab-dental-orthodontics-requirements",
+          "actions": [
+            {
+              "type": "create",
+              "description": "Create a Task for the DTR questionnaire package.",
+              "resource": {
+                "resourceType": "Task",
+                "id": "payerlab-dental-orthodontics-dtr",
+                "status": "requested",
+                "intent": "order",
+                "description": "Complete payer documentation questionnaire before PAS submission.",
+                "input": [
+                  {
+                    "type": {
+                      "text": "DTR Questionnaire"
+                    },
+                    "valueCanonical": "http://localhost:8080/fhir/Questionnaire/payerlab-dental-orthodontics"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "resourceType": "Bundle",
+  "id": "payerlab-dental-workflow-approved-response",
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:dental-workflow-approved-claim-response",
+      "resource": {
+        "resourceType": "ClaimResponse",
+        "id": "dental-workflow-approved-response",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://careparse.com/fhir/payerlab/prior-auth-state",
+              "code": "approved",
+              "display": "Approved"
+            }
+          ]
+        },
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "oral",
+              "display": "Oral"
+            }
+          ]
+        },
+        "use": "preauthorization",
+        "patient": {
+          "reference": "Patient/workflow-patient"
+        },
+        "created": "2026-01-01",
+        "insurer": {
+          "reference": "Organization/workflow-payer"
+        },
+        "requestor": {
+          "reference": "Practitioner/workflow-provider"
+        },
+        "outcome": "complete",
+        "preAuthRef": "DENTAL-PA-WORKFLOW-2026-0001",
+        "processNote": [
+          {
+            "number": 1,
+            "type": "display",
+            "text": "Approved after receipt of radiograph, periodontal charting, and medical-necessity documentation."
+          }
+        ]
+      }
+    }
+  ]
+}

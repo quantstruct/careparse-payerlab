@@ -1,0 +1,34 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "payerlab-dental-orthodontics",
+  "url": "https://careparse.com/fhir/payerlab/Questionnaire/payerlab-dental-orthodontics",
+  "version": "2026.1",
+  "name": "PayerLabDentalOrthodonticsDocumentation",
+  "title": "Dental Orthodontics Prior Authorization Documentation",
+  "status": "active",
+  "date": "2026-01-01",
+  "publisher": "CareParse PayerLab",
+  "subjectType": [
+    "Patient"
+  ],
+  "item": [
+    {
+      "linkId": "radiograph-date",
+      "text": "Most recent radiograph date",
+      "type": "date",
+      "required": true
+    },
+    {
+      "linkId": "periodontal-charting",
+      "text": "Periodontal charting summary",
+      "type": "text",
+      "required": true
+    },
+    {
+      "linkId": "medical-necessity",
+      "text": "Clinical rationale for orthodontic evaluation",
+      "type": "text",
+      "required": true
+    }
+  ]
+}
