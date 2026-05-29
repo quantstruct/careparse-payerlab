@@ -1,0 +1,53 @@
+{
+  "resourceType": "Bundle",
+  "id": "payerlab-dental-workflow-submit-response",
+  "type": "collection",
+  "entry": [
+    {
+      "fullUrl": "urn:uuid:dental-workflow-submit-claim-response",
+      "resource": {
+        "resourceType": "ClaimResponse",
+        "id": "dental-workflow-submit-response",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://careparse.com/fhir/payerlab/prior-auth-state",
+              "code": "submitted",
+              "display": "Submitted"
+            }
+          ]
+        },
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "oral",
+              "display": "Oral"
+            }
+          ]
+        },
+        "use": "preauthorization",
+        "patient": {
+          "reference": "Patient/workflow-patient"
+        },
+        "created": "2026-01-01",
+        "insurer": {
+          "reference": "Organization/workflow-payer"
+        },
+        "requestor": {
+          "reference": "Practitioner/workflow-provider"
+        },
+        "outcome": "queued",
+        "preAuthRef": "DENTAL-PA-WORKFLOW-2026-0001",
+        "processNote": [
+          {
+            "number": 1,
+            "type": "display",
+            "text": "Prior authorization request accepted with DTR documentation for payer review."
+          }
+        ]
+      }
+    }
+  ]
+}

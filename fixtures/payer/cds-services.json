@@ -1,0 +1,15 @@
+{
+  "services": [
+    {
+      "hook": "order-sign",
+      "title": "CareParse PayerLab prior authorization requirements",
+      "description": "Returns payer-side coverage requirements and documentation templates for dental prior authorization.",
+      "id": "payerlab-crd-prior-auth",
+      "prefetch": {
+        "patient": "Patient/{{context.patientId}}",
+        "coverage": "Coverage?patient={{context.patientId}}",
+        "draftOrders": "{{context.draftOrders}}"
+      }
+    }
+  ]
+}

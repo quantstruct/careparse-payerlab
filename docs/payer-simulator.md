@@ -2,25 +2,44 @@
 
 CareParse PayerLab is the payer-side sandbox that the product and AI agent will test against before production payer integrations.
 
-The first simulator is intentionally narrow:
+The simulator is intentionally narrow:
 
 - FHIR R4 payer endpoint.
-- Da Vinci PAS status inquiry.
+- CRD-style CDS Hooks discovery and order-sign invocation.
+- DTR-style payer questionnaire retrieval and QuestionnaireResponse submission.
+- Da Vinci PAS-style Claim submission and status inquiry.
+- SMART Backend Services bearer-token authorization.
 - Deterministic repo fixtures.
-- No authentication.
-- No CRD, DTR, PAS submission, subscriptions, X12 conversion, or clinical rules engine.
+- No subscriptions, X12 conversion, user interface, product agent, or clinical rules engine.
 
-## First API Surface
+## API Surface
 
-The first exposed payer endpoint is:
+CRD-style coverage requirements discovery:
 
 ```text
+GET /cds-services
+POST /cds-services/payerlab-crd-prior-auth
+```
+
+DTR-style documentation collection:
+
+```text
+GET /fhir/Questionnaire/payerlab-dental-orthodontics
+POST /fhir/QuestionnaireResponse/$submit
+```
+
+PAS-style submission and inquiry:
+
+```text
+POST /fhir/Claim/$submit
 POST /fhir/Claim/$inquire
 ```
 
-The request is a PAS Inquiry Request Bundle. The response is a PAS Inquiry Response Bundle or a FHIR `OperationOutcome`.
+`Claim/$submit` accepts a PAS request Bundle and returns a PAS response Bundle with a deterministic prior authorization reference. `Claim/$inquire` accepts a PAS Inquiry Request Bundle and returns a PAS Inquiry Response Bundle or a FHIR `OperationOutcome`.
 
-The simulator matches an inquiry using:
+## Matching
+
+The simulator matches PAS requests using:
 
 - patient member identifier
 - payer identifier
@@ -74,21 +93,26 @@ curl -sS \
 
 Dental demo fixtures are API-only and return raw FHIR `Bundle` responses. They use FHIR `Claim.type` code `oral` plus local demo dental service codes to avoid depending on licensed dental procedure code content.
 
+Run the CRD -> DTR -> PAS workflow demo against a running simulator:
+
+```bash
+PAYERLAB_BASE_URL=http://localhost:8080 ./scripts/smoke-workflow.sh
+```
+
+The workflow smoke test obtains a SMART Backend Services access token, performs service discovery, invokes the CRD order-sign service, retrieves the DTR questionnaire, submits a QuestionnaireResponse, submits a PAS Claim Bundle, and inquires on the returned authorization reference.
+
 Run the tests with:
 
 ```bash
 ./mvnw test
 ```
 
-The implementation exposes only `POST /fhir/Claim/$inquire`. Other FHIR paths return an `OperationOutcome` so the sandbox stays tightly scoped to read-only status inquiry.
+The implementation exposes only the workflow endpoints above. Other FHIR paths return an `OperationOutcome` so the sandbox stays tightly scoped to payer-side prior authorization simulation.
 
 ## Later Work
 
 Later phases may add:
 
-- `POST /fhir/Claim/$submit`
 - PAS subscriptions for pended authorization updates
-- CRD requirement discovery
-- DTR documentation capture
 - SMART/OIDC authorization
 - X12 278 integration or mapping

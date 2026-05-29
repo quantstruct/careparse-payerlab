@@ -1,0 +1,12 @@
+{
+  "hook": "order-sign",
+  "hookInstance": "workflow-hook-001",
+  "fhirServer": "http://localhost:8080/fhir",
+  "context": {
+    "patientId": "workflow-patient",
+    "draftOrders": {
+      "resourceType": "Bundle",
+      "type": "collection"
+    }
+  }
+}

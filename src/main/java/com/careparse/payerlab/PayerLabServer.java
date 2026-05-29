@@ -26,13 +26,25 @@ public final class PayerLabServer {
     public static Server createServer(int port, Path fixtureRoot) {
         FhirContext fhirContext = FhirContext.forR4();
         PayerFixtureRepository repository = new PayerFixtureRepository(fhirContext, fixtureRoot);
+        Path authRoot = fixtureRoot.getParent() == null ? Path.of("fixtures/auth") : fixtureRoot.getParent().resolve("auth");
+        AuthService authService = new AuthService(authRoot);
 
         ServletContextHandler context = new ServletContextHandler(ServletContextHandler.NO_SESSIONS);
         context.setContextPath("/");
         context.addFilter(
-                new FilterHolder(new EndpointRestrictionFilter(fhirContext)),
-                "/fhir/*",
+                new FilterHolder(new EndpointRestrictionFilter(fhirContext, authService)),
+                "/*",
                 EnumSet.of(DispatcherType.REQUEST));
+        context.addServlet(new ServletHolder(new AuthServlet(fhirContext, authService)), "/fhir/.well-known/smart-configuration");
+        context.addServlet(new ServletHolder(new AuthServlet(fhirContext, authService)), "/auth/.well-known/openid-configuration");
+        context.addServlet(new ServletHolder(new AuthServlet(fhirContext, authService)), "/auth/jwks.json");
+        context.addServlet(new ServletHolder(new AuthServlet(fhirContext, authService)), "/auth/token");
+        context.addServlet(new ServletHolder(new AuthServlet(fhirContext, authService)), "/fhir/metadata");
+        context.addServlet(new ServletHolder(new PayerWorkflowServlet(fhirContext, fixtureRoot)), "/cds-services");
+        context.addServlet(new ServletHolder(new PayerWorkflowServlet(fhirContext, fixtureRoot)), "/cds-services/*");
+        context.addServlet(new ServletHolder(new PayerWorkflowServlet(fhirContext, fixtureRoot)), "/fhir/Questionnaire/payerlab-dental-orthodontics");
+        context.addServlet(new ServletHolder(new PayerWorkflowServlet(fhirContext, fixtureRoot)), "/fhir/QuestionnaireResponse/$submit");
+        context.addServlet(new ServletHolder(new PayerWorkflowServlet(fhirContext, fixtureRoot)), "/fhir/Claim/$submit");
         context.addServlet(new ServletHolder(new FhirServlet(fhirContext, repository)), "/fhir/*");
 
         Server server = new Server(port);

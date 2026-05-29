@@ -9,7 +9,7 @@ This repository records the required interoperability standards, provides a repr
 - Maintain a standards manifest in `packages/lock.yaml`.
 - Fetch required standards and payer implementation-guide artifacts into `generated/`.
 - Verify artifact versions, checksums, extraction, and expected resource files.
-- Simulate payer-side PAS prior authorization status inquiry with deterministic fixtures.
+- Simulate payer-side CRD, DTR, PAS submission, and PAS status inquiry with deterministic fixtures.
 - Document the standards layer and why the repository does not vendor complete implementation guide websites.
 
 ## Non-Goals
@@ -32,6 +32,12 @@ Verify the local standards cache:
 
 The generated artifacts are local build outputs. The committed source of truth is the manifest, fetch script, verification script, and documentation.
 
+The active external conformance target is recorded in:
+
+```text
+packages/conformance-targets.json
+```
+
 Run the payer simulator:
 
 ```bash
@@ -44,7 +50,30 @@ Run the portable Docker stack:
 docker compose up --build
 ```
 
-The first simulated payer endpoint is:
+The simulator exposes a payer-side CRD -> DTR -> PAS path:
+
+```text
+GET  http://localhost:8080/cds-services
+POST http://localhost:8080/cds-services/payerlab-crd-prior-auth
+GET  http://localhost:8080/fhir/Questionnaire/payerlab-dental-orthodontics
+POST http://localhost:8080/fhir/QuestionnaireResponse/$submit
+POST http://localhost:8080/fhir/Claim/$submit
+POST http://localhost:8080/fhir/Claim/$inquire
+```
+
+Run the five-minute workflow smoke test against a running simulator:
+
+```bash
+PAYERLAB_BASE_URL=http://localhost:8080 ./scripts/smoke-workflow.sh
+```
+
+Run the SMART Backend Services auth smoke test:
+
+```bash
+PAYERLAB_BASE_URL=http://localhost:8080 ./scripts/smoke-smart-backend-auth.sh >/dev/null
+```
+
+The PAS status inquiry endpoint is:
 
 ```text
 POST http://localhost:8080/fhir/Claim/$inquire
@@ -79,4 +108,5 @@ Run the Java test suite:
 
 - `docs/standards.md`
 - `docs/payer-simulator.md`
+- `docs/conformance.md`
 - `docs/why-not-vendor-igs.md`

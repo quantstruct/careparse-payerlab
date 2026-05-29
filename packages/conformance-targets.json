@@ -1,0 +1,32 @@
+{
+  "active": "inferno-smart-backend",
+  "targets": [
+    {
+      "id": "inferno-smart-backend",
+      "testKit": "inferno-framework/smart-app-launch-test-kit",
+      "groups": [
+        "smart_discovery_stu2",
+        "backend_services_authorization"
+      ],
+      "status": "implemented"
+    },
+    {
+      "id": "inferno-pas-server-2.0.1",
+      "testKit": "inferno-framework/davinci-pas-test-kit",
+      "ig": "hl7.fhir.us.davinci-pas#2.0.1",
+      "status": "planned"
+    },
+    {
+      "id": "inferno-dtr-payer-server-2.0.1",
+      "testKit": "inferno-framework/davinci-dtr-test-kit",
+      "ig": "hl7.fhir.us.davinci-dtr#2.0.1",
+      "status": "planned"
+    },
+    {
+      "id": "inferno-crd-server-2.0.1",
+      "testKit": "inferno-framework/davinci-crd-test-kit",
+      "ig": "hl7.fhir.us.davinci-crd#2.0.1",
+      "status": "planned"
+    }
+  ]
+}

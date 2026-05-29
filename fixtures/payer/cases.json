@@ -72,6 +72,15 @@
     "response": "responses/dental-additional-info-needed.bundle.json"
   },
   {
+    "state": "dental-workflow-approved",
+    "patientMemberIdentifier": "CP-DENTAL-MEMBER-WORKFLOW",
+    "payerIdentifier": "CP-DENTAL-PAYER-001",
+    "requestingProviderNpi": "1888888888",
+    "authorizationIdentifier": "DENTAL-PA-WORKFLOW-2026-0001",
+    "httpStatus": 200,
+    "response": "responses/dental-workflow-approved.bundle.json"
+  },
+  {
     "state": "technical-error",
     "patientMemberIdentifier": "CP-MEMBER-TECHNICAL",
     "payerIdentifier": "CP-PAYER-001",

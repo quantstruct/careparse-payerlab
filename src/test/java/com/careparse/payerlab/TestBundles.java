@@ -5,10 +5,13 @@ import org.hl7.fhir.r4.model.Claim;
 import org.hl7.fhir.r4.model.CodeableConcept;
 import org.hl7.fhir.r4.model.Coding;
 import org.hl7.fhir.r4.model.Coverage;
+import org.hl7.fhir.r4.model.DateType;
 import org.hl7.fhir.r4.model.Organization;
 import org.hl7.fhir.r4.model.Patient;
 import org.hl7.fhir.r4.model.Practitioner;
+import org.hl7.fhir.r4.model.QuestionnaireResponse;
 import org.hl7.fhir.r4.model.Reference;
+import org.hl7.fhir.r4.model.StringType;
 
 import java.util.Date;
 
@@ -38,6 +41,46 @@ final class TestBundles {
                 authorizationIdentifier,
                 "oral",
                 "Oral");
+    }
+
+    static QuestionnaireResponse workflowQuestionnaireResponse() {
+        QuestionnaireResponse response = new QuestionnaireResponse();
+        response.setId("workflow-dtr-response");
+        response.setQuestionnaire("https://careparse.com/fhir/payerlab/Questionnaire/payerlab-dental-orthodontics");
+        response.setStatus(QuestionnaireResponse.QuestionnaireResponseStatus.COMPLETED);
+        response.setSubject(new Reference("Patient/workflow-patient"));
+        response.addItem()
+                .setLinkId("radiograph-date")
+                .setText("Most recent radiograph date")
+                .addAnswer()
+                .setValue(new DateType("2026-01-02"));
+        response.addItem()
+                .setLinkId("periodontal-charting")
+                .setText("Periodontal charting summary")
+                .addAnswer()
+                .setValue(new StringType("Generalized mild periodontal findings with no active infection."));
+        response.addItem()
+                .setLinkId("medical-necessity")
+                .setText("Clinical rationale for orthodontic evaluation")
+                .addAnswer()
+                .setValue(new StringType("Functional malocclusion evaluation requested after dental examination."));
+        return response;
+    }
+
+    static Bundle workflowPasSubmissionBundle() {
+        return dentalInquiryBundle(
+                "CP-DENTAL-MEMBER-WORKFLOW",
+                "CP-DENTAL-PAYER-001",
+                "1888888888",
+                "ORDER-DENTAL-ORTHO-001");
+    }
+
+    static Bundle workflowPasInquiryBundle(String authorizationIdentifier) {
+        return dentalInquiryBundle(
+                "CP-DENTAL-MEMBER-WORKFLOW",
+                "CP-DENTAL-PAYER-001",
+                "1888888888",
+                authorizationIdentifier);
     }
 
     private static Bundle inquiryBundle(
